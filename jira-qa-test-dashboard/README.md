@@ -2,6 +2,8 @@
 
 Web dashboard: load a **Jira issue**, **generate** structured test cases from the description, **run** automation (Playwright / Chromium) against a **base URL** you provide.
 
+**Fast run:** `npm ci` → `npx playwright install chromium` → `npm run dev` → open **http://localhost:3847**
+
 ## Repository layout (important for deploy)
 
 **Option A — This folder is the Git repo root (recommended for a “dashboard-only” repo):**  
