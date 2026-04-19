@@ -76,3 +76,7 @@ Render runs **`npm ci && npm run build`** first, then **`npx playwright install 
 | Team / phone / laptop off | Render (or another host) → HTTPS URL |
 
 Secrets live in **`.env` (local)** or **Render environment variables (cloud)** only.
+
+### Deploy from GitHub (optional)
+
+After the Render service exists once: **Render → Web Service → Settings → Deploy hook** → copy the URL. In **GitHub → Settings → Secrets and variables → Actions**, create **`RENDER_DEPLOY_HOOK_URL`** with that URL. Pushes to **`main`** that touch `jira-qa-test-dashboard/` or **`render.yaml`** will run **Actions → Render deploy hook** and call Render for you. You can also run that workflow **manually** from the Actions tab.

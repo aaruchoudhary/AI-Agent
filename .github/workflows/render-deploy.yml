@@ -1,0 +1,34 @@
+# Trigger a Render deploy without opening the dashboard (after one-time setup).
+#
+# Setup (once):
+# 1) Render → your Web Service → Settings → find "Deploy hook" → copy the URL.
+# 2) GitHub → repo Settings → Secrets and variables → Actions → New repository secret
+#    Name: RENDER_DEPLOY_HOOK_URL   Value: (paste the hook URL)
+#
+# Then: push to main, or run this workflow manually (Actions → Render deploy hook → Run workflow).
+
+name: Render deploy hook
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "jira-qa-test-dashboard/**"
+      - "render.yaml"
+      - ".github/workflows/render-deploy.yml"
+
+jobs:
+  trigger:
+    runs-on: ubuntu-latest
+    steps:
+      - name: POST Render deploy hook
+        env:
+          HOOK: ${{ secrets.RENDER_DEPLOY_HOOK_URL }}
+        run: |
+          if [ -z "$HOOK" ]; then
+            echo "No secret RENDER_DEPLOY_HOOK_URL — add it in GitHub repo Settings → Secrets (see workflow header comment)."
+            exit 0
+          fi
+          curl -fsS -m 120 -X POST "$HOOK"
+          echo "Deploy hook sent."
