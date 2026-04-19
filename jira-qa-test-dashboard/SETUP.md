@@ -48,7 +48,7 @@ Deploy to **Render** from your GitHub repo (this app is configured in the **pare
    - Optional: `OPENAI_API_KEY`, `DASHBOARD_TOKEN`, `PUBLIC_BASE_URL` (your Render URL)
 6. **Do not** set `PORT` manually — Render sets it.
 
-If the **build** fails on Playwright or system libraries, open **Build logs** on Render. See [DEPLOY.md](./DEPLOY.md). You can also run **`docker build`** from `jira-qa-test-dashboard` on your machine to debug the image locally.
+Render runs **`npm ci && npm run build`** first, then **`npx playwright install chromium`** in **pre-deploy** (before `npm start`). If a step fails, check **Build logs** (build) and **Deploy logs** (pre-deploy). See [DEPLOY.md](./DEPLOY.md). For local Docker debugging, use **`docker build`** from `jira-qa-test-dashboard`.
 
 ---
 

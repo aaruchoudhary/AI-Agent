@@ -1,11 +1,14 @@
-# Standalone repo root: same Node + Playwright build as monorepo root render.yaml.
+# Standalone repo root — same pattern as monorepo root render.yaml.
 
 services:
   - type: web
     name: qatestcases
     runtime: node
     plan: free
-    buildCommand: npm ci && npx playwright install --with-deps chromium && npm run build
+    branch: main
+    autoDeployTrigger: commit
+    buildCommand: npm ci && npm run build
+    preDeployCommand: npx playwright install chromium
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
