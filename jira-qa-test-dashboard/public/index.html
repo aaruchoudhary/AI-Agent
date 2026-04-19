@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Jira → Tests → Run</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <div id="warnBanner" class="warn-banner" hidden></div>
+    <header class="header">
+      <div>
+        <h1>Jira test dashboard</h1>
+        <p class="sub">
+          Fetch a ticket, generate cases from requirements, run them against your URL (Playwright).
+        </p>
+      </div>
+      <div id="health" class="health" aria-live="polite"></div>
+    </header>
+
+    <main class="grid">
+      <section class="card">
+        <h2>1. Ticket &amp; URL</h2>
+        <label class="field">
+          <span>Jira issue key</span>
+          <input id="issueKey" type="text" placeholder="PROJ-123" autocomplete="off" />
+        </label>
+        <label class="field">
+          <span>Target base URL</span>
+          <input id="baseUrl" type="text" placeholder="https://your-app.example.com (https added if omitted)" />
+        </label>
+        <div class="actions">
+          <button type="button" id="btnFetch" class="btn secondary">Fetch from Jira</button>
+          <button type="button" id="btnPlan" class="btn">Fetch + generate tests</button>
+        </div>
+        <p class="hint">
+          Configure <code>.env</code> in this folder (copy from <code>.env.example</code>). After
+          <code>npm install</code>, run <code>npx playwright install chromium</code> once. Set
+          <code>OPENAI_API_KEY</code> for ticket-grounded, detailed cases; without it, generation
+          parses your description into structured tests (still review automation selectors).
+        </p>
+        <div id="tokenPanel" class="token-panel" hidden>
+          <label class="field">
+            <span>Team access token (if your admin set <code>DASHBOARD_TOKEN</code> on the server)</span>
+            <div class="token-row">
+              <input id="accessToken" type="password" autocomplete="off" placeholder="Paste shared token" />
+              <button type="button" id="btnSaveToken" class="btn secondary">Save in browser</button>
+            </div>
+          </label>
+          <p class="hint">Stored only in this browser’s session storage, not on the server.</p>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>2. Issue summary</h2>
+        <div id="issueMeta" class="meta muted">No ticket loaded.</div>
+        <label class="field">
+          <span>Description (editable before generate)</span>
+          <textarea id="description" rows="8" placeholder="Loads from Jira; you can paste extra acceptance criteria here."></textarea>
+        </label>
+        <div class="actions">
+          <button type="button" id="btnGenerate" class="btn">Generate / refresh tests</button>
+        </div>
+      </section>
+
+      <section class="card wide">
+        <h2>3. Test cases</h2>
+        <div class="toolbar">
+          <span id="caseCount" class="muted">0 cases</span>
+          <button type="button" id="btnRun" class="btn">Run all on URL</button>
+        </div>
+        <div class="table-wrap">
+          <table class="table" id="casesTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Type</th>
+                <th>Ticket trace</th>
+                <th>Expected</th>
+                <th>Manual steps</th>
+                <th>Automation</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card wide">
+        <h2>4. Execution results</h2>
+        <div id="runSummary" class="summary muted">No run yet.</div>
+        <div class="table-wrap">
+          <table class="table" id="resultsTable">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Status</th>
+                <th>Time</th>
+                <th>Detail</th>
+              </tr>
+            </thead>
+            <tbody></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <div id="toast" class="toast" role="status"></div>
+    <script src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+# Jira QA Autonomous Checklist
+
+- [ ] Required MCP servers identified (Atlassian, Figma as needed)
+- [ ] MCP authentication confirmed (`mcp_auth` completed where required)
+- [ ] Jira ticket fetched (description/comments/worklogs)
+- [ ] Requirements extracted
+- [ ] Acceptance criteria extracted
+- [ ] Edge cases identified from ticket
+- [ ] MR/PR link identified from worklog/comments
+- [ ] Changed files analyzed
+- [ ] Functional impact documented
+- [ ] Additional edge cases from code changes documented
+- [ ] Figma link checked
+- [ ] UI validation completed (if Figma present)
+- [ ] Positive test cases generated
+- [ ] Negative test cases generated
+- [ ] Edge test cases generated
+- [ ] Regression test cases generated
+- [ ] User asked: "Please trigger the Jenkins build."
+- [ ] User confirmed build completion
+- [ ] Tests executed on QA3
+- [ ] Allure-style report generated
+- [ ] Jira worklog updated with summary/report/defects

@@ -1,0 +1,35 @@
+# Monorepo: deploy only the Jira QA dashboard from this repo.
+# https://render.com/docs/monorepo-support#setting-a-root-directory
+#
+# Paths below are relative to rootDir (jira-qa-test-dashboard).
+
+services:
+  - type: web
+    name: jira-qa-dashboard
+    runtime: docker
+    rootDir: jira-qa-test-dashboard
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3847"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: JIRA_HOST
+        sync: false
+      - key: JIRA_EMAIL
+        sync: false
+      - key: JIRA_API_TOKEN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DASHBOARD_TOKEN
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
+    buildFilter:
+      paths:
+        - jira-qa-test-dashboard/**

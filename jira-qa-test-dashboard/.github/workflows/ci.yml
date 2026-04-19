@@ -1,0 +1,29 @@
+# Runs only when this folder is the Git repository root.
+# In a monorepo, use ../../.github/workflows/jira-qa-dashboard-ci.yml at the repo root instead.
+
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: package-lock.json
+
+      - name: Install
+        run: npm ci
+
+      - name: Typecheck & build
+        run: npm run build

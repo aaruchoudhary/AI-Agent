@@ -1,0 +1,28 @@
+# Render Blueprint: https://render.com/docs/blueprint-spec
+# Use when this folder is the connected Git repo root (Docker deploy).
+
+services:
+  - type: web
+    name: jira-qa-dashboard
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: starter
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: "3847"
+      - key: TRUST_PROXY
+        value: "1"
+      - key: JIRA_HOST
+        sync: false
+      - key: JIRA_EMAIL
+        sync: false
+      - key: JIRA_API_TOKEN
+        sync: false
+      - key: OPENAI_API_KEY
+        sync: false
+      - key: DASHBOARD_TOKEN
+        sync: false
+      - key: PUBLIC_BASE_URL
+        sync: false
