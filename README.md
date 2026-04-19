@@ -4,8 +4,9 @@ This repository contains Cursor skills, scripts, and the **Jira QA Test Dashboar
 
 ## Jira QA Test Dashboard (deploy)
 
+- **Setup (local + cloud):** [jira-qa-test-dashboard/SETUP.md](./jira-qa-test-dashboard/SETUP.md)
 - **Docs & local run:** [jira-qa-test-dashboard/README.md](./jira-qa-test-dashboard/README.md)
-- **Production / Docker / secrets:** [jira-qa-test-dashboard/DEPLOY.md](./jira-qa-test-dashboard/DEPLOY.md)
+- **Production / secrets:** [jira-qa-test-dashboard/DEPLOY.md](./jira-qa-test-dashboard/DEPLOY.md)
 
 ### Monorepo CI
 

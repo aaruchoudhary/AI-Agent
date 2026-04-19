@@ -4,6 +4,8 @@ Web dashboard: load a **Jira issue**, **generate** structured test cases from th
 
 **Fast run:** `npm ci` → `npx playwright install chromium` → `npm run dev` → open **http://localhost:3847**
 
+Full step-by-step (local + Render): **[SETUP.md](./SETUP.md)**
+
 ## Repository layout (important for deploy)
 
 **Option A — This folder is the Git repo root (recommended for a “dashboard-only” repo):**  
@@ -13,7 +15,7 @@ Use the `Dockerfile`, `render.yaml`, and `.github/workflows/ci.yml` **inside thi
 Use the **parent** repository’s:
 
 - `.github/workflows/jira-qa-dashboard-ci.yml` — CI with `working-directory: jira-qa-test-dashboard`
-- `render.yaml` at the **repo root** — `rootDir: jira-qa-test-dashboard` and Docker paths relative to that directory
+- `render.yaml` at the **repo root** — native **Node** service with `rootDir: jira-qa-test-dashboard`
 
 Do **not** rely on this folder’s `.github/workflows` when the Git root is above it; GitHub only loads workflows from the repository root.
 
