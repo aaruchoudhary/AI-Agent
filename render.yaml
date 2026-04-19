@@ -1,20 +1,20 @@
-# Monorepo: Jira QA dashboard on Render (Docker).
-# Docker paths are relative to the Git repository root (Render requirement).
-#
-# Public URL uses the service `name`, e.g. https://qatestcases.onrender.com
+# Jira QA dashboard on Render — native Node (simpler than Docker on free tier).
+# URL pattern: https://qatestcases.onrender.com (exact host is shown in the Render dashboard).
 
 services:
   - type: web
     name: qatestcases
-    runtime: docker
-    dockerfilePath: ./jira-qa-test-dashboard/Dockerfile
-    dockerContext: ./jira-qa-test-dashboard
-    plan: starter
+    runtime: node
+    plan: free
+    rootDir: jira-qa-test-dashboard
+    buildCommand: npm ci && npx playwright install --with-deps chromium && npm run build
+    startCommand: npm start
     healthCheckPath: /api/health
     envVars:
+      - key: NODE_VERSION
+        value: "22.12.0"
       - key: NODE_ENV
         value: production
-      # Do NOT set PORT — Render injects it; the app listens on process.env.PORT
       - key: TRUST_PROXY
         value: "1"
       - key: JIRA_HOST

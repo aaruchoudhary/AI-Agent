@@ -1,14 +1,16 @@
-# Render Blueprint: https://render.com/docs/blueprint-spec
-# Use when this folder is the connected Git repo root (Docker deploy).
+# Standalone repo root: same Node + Playwright build as monorepo root render.yaml.
 
 services:
   - type: web
     name: qatestcases
-    runtime: docker
-    dockerfilePath: ./Dockerfile
-    plan: starter
+    runtime: node
+    plan: free
+    buildCommand: npm ci && npx playwright install --with-deps chromium && npm run build
+    startCommand: npm start
     healthCheckPath: /api/health
     envVars:
+      - key: NODE_VERSION
+        value: "22.12.0"
       - key: NODE_ENV
         value: production
       - key: TRUST_PROXY

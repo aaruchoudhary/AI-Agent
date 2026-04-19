@@ -8,7 +8,8 @@ COPY src ./src
 RUN npx tsc -p tsconfig.json
 
 # --- runtime: browsers + Node for Playwright ---
-ARG PLAYWRIGHT_TAG=v1.59.0-jammy
+# Pin to a tag that is consistently available on MCR
+ARG PLAYWRIGHT_TAG=v1.49.1-jammy
 FROM mcr.microsoft.com/playwright:${PLAYWRIGHT_TAG}
 WORKDIR /app
 COPY package.json package-lock.json ./

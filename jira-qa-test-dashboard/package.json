@@ -4,7 +4,7 @@
   "private": true,
   "description": "Dashboard: Jira ticket → test cases → Playwright execution on a target URL",
   "engines": {
-    "node": ">=22"
+    "node": "22.x"
   },
   "type": "module",
   "scripts": {
