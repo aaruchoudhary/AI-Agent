@@ -13,7 +13,7 @@ Pushes that touch `jira-qa-test-dashboard/**` run **GitHub Actions** (`.github/w
 
 ### Monorepo deploy on Render
 
-Use the repository-root **`render.yaml`**: it sets `rootDir: jira-qa-test-dashboard` so Docker builds only that app. Configure `JIRA_*`, `DASHBOARD_TOKEN`, and other env vars in the Render dashboard after the first deploy.
+Use the repository-root **`render.yaml`**: Docker uses `dockerfilePath` / `dockerContext` under `jira-qa-test-dashboard/`. Do **not** set `PORT` in Render (the platform injects it). Configure `JIRA_*`, `DASHBOARD_TOKEN`, and other env vars in the Render dashboard after the first deploy.
 
 ### Standalone GitHub repo (optional)
 

@@ -7,11 +7,10 @@ services:
     runtime: docker
     dockerfilePath: ./Dockerfile
     plan: starter
+    healthCheckPath: /api/health
     envVars:
       - key: NODE_ENV
         value: production
-      - key: PORT
-        value: "3847"
       - key: TRUST_PROXY
         value: "1"
       - key: JIRA_HOST

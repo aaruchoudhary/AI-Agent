@@ -17,7 +17,7 @@ COPY --from=build /app/dist ./dist
 COPY public ./public
 
 ENV NODE_ENV=production
-ENV PORT=3847
+# PORT is set by Render at runtime; local default is 3847 in server.ts
 EXPOSE 3847
 
 CMD ["node", "dist/server.js"]

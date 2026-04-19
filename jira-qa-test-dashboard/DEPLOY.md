@@ -14,7 +14,7 @@ The app is a single Node server: static UI + JSON APIs + Playwright (Chromium). 
 
 1. Push the whole repository (e.g. `AI Agent`).
 2. CI: use the repo root workflow that sets `working-directory: jira-qa-test-dashboard` (see parent `README.md`).
-3. On **Render:** use the **repository root** `render.yaml` (`rootDir: jira-qa-test-dashboard`). Docker only sees files under that directory.
+3. On **Render:** use the **repository root** `render.yaml` (`dockerContext: ./jira-qa-test-dashboard`). Leave **`PORT` unset** in the dashboard so Render can inject it. After deploy, open the **`.onrender.com`** URL from the service page.
 
 On **Railway:** create a service, set **Root Directory** to `jira-qa-test-dashboard`, connect GitHub, and add the same env vars.
 
