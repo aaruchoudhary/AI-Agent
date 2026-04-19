@@ -1,5 +1,7 @@
 # Setup (local + cloud)
 
+**Proceed in order:** (1) Run **local** dashboard → **http://localhost:3847**. (2) On **[Render](https://dashboard.render.com/)**, create the **Blueprint** from **`main`** so the service goes **Live**. (3) Optional: add **`RENDER_DEPLOY_HOOK_URL`** in GitHub **Actions** secrets so pushes can trigger deploys (see bottom).
+
 ## 1) Local (your laptop)
 
 Use this when you want **http://localhost:3847** — it **only works while your PC is on** and the dev server is running.
