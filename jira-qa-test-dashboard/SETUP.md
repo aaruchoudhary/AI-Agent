@@ -39,14 +39,30 @@ npm start
 
 Deploy to **Render** from your GitHub repo (this app is configured in the **parent** repo’s `render.yaml` when you use the `AI-Agent` monorepo).
 
-1. [Render Dashboard](https://dashboard.render.com) → **New** → **Blueprint** (or connect the repo and apply `render.yaml`).
-2. Pick repo **`aaruchoudhary/AI-Agent`** (or yours) and branch **`main`**.
-3. After the first deploy, copy the **exact** **`.onrender.com`** URL from the service page (do not guess it). The blueprint uses service name **`qatestcases`**, which is *often* `https://qatestcases.onrender.com`, but Render may assign a different host if that name was taken.
-4. Confirm the app: open **`https://YOUR-HOST/api/health`** — you should see JSON with `"ok":true`. If you get **404**, the service is missing, failed deploy, or the URL is wrong — check **Logs** on Render and redeploy from **`main`**.
-5. In **Environment**, set (never commit these):
+Repo: **https://github.com/aaruchoudhary/AI-Agent** (branch **`main`**, `render.yaml` at the **root**).
+
+### Render click path (first time)
+
+1. Open **[Render Dashboard](https://dashboard.render.com/)** and sign in.
+2. **New** → **Blueprint**.
+3. Under **Git Provider**, choose **GitHub** and authorize if asked.
+4. Select repository **`AI-Agent`** (`aaruchoudhary/AI-Agent`), branch **`main`**.
+5. Render should detect **`render.yaml`** in the repo root and show a service named **`qatestcases`**. Click **Apply** / **Create** / **Connect** (wording varies).
+6. Wait for **Build** → **Deploy** (including **Pre-deploy** Playwright step) to finish; status should become **Live**.
+7. Copy the **HTTPS URL** from the service page and test **`/api/health`** as below.
+
+If Render says it **cannot find `render.yaml`**, confirm the file exists on **`main`** at the **repository root** (not only inside a subfolder path in the UI).
+
+### After the service exists
+
+1. [Render Dashboard](https://dashboard.render.com) → open the **qatestcases** web service.
+2. **Manual Deploy** → **Deploy latest commit** whenever you push fixes to **`main`**.
+3. Copy the **exact** **`.onrender.com`** URL from the top of the service page (do not guess it). The name **`qatestcases`** is often `https://qatestcases.onrender.com`, but Render may use another host if that name was taken.
+4. Confirm the app: **`https://YOUR-HOST/api/health`** should return JSON with `"ok":true`. **404** usually means the service is not live, the URL is wrong, or deploy failed — open **Logs** (Build + Deploy).
+5. **Environment** → add (never commit these):
    - `JIRA_HOST`, `JIRA_EMAIL`, `JIRA_API_TOKEN`
-   - Optional: `OPENAI_API_KEY`, `DASHBOARD_TOKEN`, `PUBLIC_BASE_URL` (your Render URL)
-6. **Do not** set `PORT` manually — Render sets it.
+   - Optional: `OPENAI_API_KEY`, `DASHBOARD_TOKEN`, `PUBLIC_BASE_URL` (your real Render HTTPS URL)
+6. **Do not** set **`PORT`** — Render injects it.
 
 Render runs **`npm ci && npm run build`** first, then **`npx playwright install chromium`** in **pre-deploy** (before `npm start`). If a step fails, check **Build logs** (build) and **Deploy logs** (pre-deploy). See [DEPLOY.md](./DEPLOY.md). For local Docker debugging, use **`docker build`** from `jira-qa-test-dashboard`.
 
