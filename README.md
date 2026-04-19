@@ -18,4 +18,3 @@ Use the repository-root **`render.yaml`**: it sets `rootDir: jira-qa-test-dashbo
 ### Standalone GitHub repo (optional)
 
 To publish **only** the dashboard, copy the `jira-qa-test-dashboard` folder to a new repository root and use the `render.yaml` inside that folder.
-"# AI-Agent" 
