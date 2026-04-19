@@ -1,4 +1,4 @@
-# Standalone repo root — same pattern as monorepo root render.yaml.
+# Standalone repo root — free tier (no preDeployCommand).
 
 services:
   - type: web
@@ -7,8 +7,7 @@ services:
     plan: free
     branch: main
     autoDeployTrigger: commit
-    buildCommand: npm ci && npm run build
-    preDeployCommand: npx playwright install chromium
+    buildCommand: npm ci && npx playwright install chromium && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

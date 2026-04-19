@@ -14,7 +14,7 @@ The app is a single Node server: static UI + JSON APIs + Playwright (Chromium). 
 
 1. Push the whole repository (e.g. `AI Agent`).
 2. CI: use the repo root workflow that sets `working-directory: jira-qa-test-dashboard` (see parent `README.md`).
-3. On **Render:** use the **repository root** `render.yaml` (native **Node**, `rootDir: jira-qa-test-dashboard`). Build compiles the app; **pre-deploy** runs `npx playwright install chromium`. Leave **`PORT` unset**. Open the **`.onrender.com`** URL from the service page. If Playwright fails, check **Deploy** logs (pre-deploy) or use **`Dockerfile`** locally.
+3. On **Render:** use the **repository root** `render.yaml` (native **Node**, `rootDir: jira-qa-test-dashboard`). **Free** tier has no `preDeployCommand`; Playwright installs inside **`buildCommand`**. Leave **`PORT` unset**. Open the **`.onrender.com`** URL from the service page. If Playwright fails, check **Build logs** or use **`Dockerfile`** locally.
 
 On **Railway:** create a service, set **Root Directory** to `jira-qa-test-dashboard`, connect GitHub, and add the same env vars.
 

@@ -1,5 +1,5 @@
-# Jira QA dashboard on Render — native Node.
-# Build = compile only; browsers install in preDeploy (more reliable than one huge build line).
+# Jira QA dashboard on Render — native Node (free tier).
+# Free tier does NOT support preDeployCommand; Playwright installs in buildCommand.
 
 services:
   - type: web
@@ -9,8 +9,7 @@ services:
     rootDir: jira-qa-test-dashboard
     branch: main
     autoDeployTrigger: commit
-    buildCommand: npm ci && npm run build
-    preDeployCommand: npx playwright install chromium
+    buildCommand: npm ci && npx playwright install chromium && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:

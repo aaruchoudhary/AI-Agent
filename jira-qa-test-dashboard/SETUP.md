@@ -50,7 +50,7 @@ Repo: **https://github.com/aaruchoudhary/AI-Agent** (branch **`main`**, `render.
 3. Under **Git Provider**, choose **GitHub** and authorize if asked.
 4. Select repository **`AI-Agent`** (`aaruchoudhary/AI-Agent`), branch **`main`**.
 5. Render should detect **`render.yaml`** in the repo root and show a service named **`qatestcases`**. Click **Apply** / **Create** / **Connect** (wording varies).
-6. Wait for **Build** → **Deploy** (including **Pre-deploy** Playwright step) to finish; status should become **Live**.
+6. Wait for **Build** to finish (includes Playwright Chromium install on the **free** tier — there is no pre-deploy step). Status should become **Live**.
 7. Copy the **HTTPS URL** from the service page and test **`/api/health`** as below.
 
 If Render says it **cannot find `render.yaml`**, confirm the file exists on **`main`** at the **repository root** (not only inside a subfolder path in the UI).
@@ -66,7 +66,7 @@ If Render says it **cannot find `render.yaml`**, confirm the file exists on **`m
    - Optional: `OPENAI_API_KEY`, `DASHBOARD_TOKEN`, `PUBLIC_BASE_URL` (your real Render HTTPS URL)
 6. **Do not** set **`PORT`** — Render injects it.
 
-Render runs **`npm ci && npm run build`** first, then **`npx playwright install chromium`** in **pre-deploy** (before `npm start`). If a step fails, check **Build logs** (build) and **Deploy logs** (pre-deploy). See [DEPLOY.md](./DEPLOY.md). For local Docker debugging, use **`docker build`** from `jira-qa-test-dashboard`.
+On **free** tier, Render runs one **`buildCommand`**: **`npm ci && npx playwright install chromium && npm run build`**, then **`npm start`**. If the build fails, open **Build logs**. See [DEPLOY.md](./DEPLOY.md). For Docker locally, use **`docker build`** in `jira-qa-test-dashboard`.
 
 ---
 
