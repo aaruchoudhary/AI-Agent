@@ -1,11 +1,12 @@
 # Monorepo: deploy only the Jira QA dashboard from this repo.
 # https://render.com/docs/monorepo-support#setting-a-root-directory
 #
+# Service `name` becomes the default Render hostname, e.g. https://qatestcases.onrender.com
 # Paths below are relative to rootDir (jira-qa-test-dashboard).
 
 services:
   - type: web
-    name: jira-qa-dashboard
+    name: qatestcases
     runtime: docker
     rootDir: jira-qa-test-dashboard
     dockerfilePath: ./Dockerfile

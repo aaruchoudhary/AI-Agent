@@ -3,7 +3,7 @@
 
 services:
   - type: web
-    name: jira-qa-dashboard
+    name: qatestcases
     runtime: docker
     dockerfilePath: ./Dockerfile
     plan: starter
