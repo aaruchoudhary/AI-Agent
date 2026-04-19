@@ -3,14 +3,8 @@ name: Jira QA dashboard CI
 on:
   push:
     branches: [main, master]
-    paths:
-      - "jira-qa-test-dashboard/**"
-      - ".github/workflows/jira-qa-dashboard-ci.yml"
   pull_request:
     branches: [main, master]
-    paths:
-      - "jira-qa-test-dashboard/**"
-      - ".github/workflows/jira-qa-dashboard-ci.yml"
 
 defaults:
   run:
